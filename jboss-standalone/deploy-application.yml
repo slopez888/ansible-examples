@@ -1,9 +1,9 @@
 ---
 # This playbook deploys two simple applications to JBoss server. 
 
-- hosts: all
+- hosts: web
 
   roles:
 # Optionally, (re)deploy JBoss here	  
-#    - jboss-standalone
-    - java-app
+   - jboss-standalone
+   - java-app
