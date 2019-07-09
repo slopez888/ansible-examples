@@ -27,6 +27,7 @@
     baseurl: http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/e/epel-release-7-11.noarch.rpm
 
 - name: install some useful nagios plugins
+  become: yes
   yum:
     name: "{{ item }}"
     state: present
@@ -39,6 +40,7 @@
    - nagios-plugins-disk
 
 - name: Install ntp
+  become: yes
   yum:
     name: ntp
     state: present
