@@ -20,6 +20,7 @@
 #    dest: /etc/pki/rpm-gpg
 
 - name: enable ec2 rhel7 repo for nagios
+  become: yes
   yum_repository:
     name: epel
     description: EPEL YUM repo
