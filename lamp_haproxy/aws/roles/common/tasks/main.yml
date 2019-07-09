@@ -19,12 +19,20 @@
 #    src: RPM-GPG-KEY-EPEL-6
 #    dest: /etc/pki/rpm-gpg
 
+- name: remove ec2 rhel7 repo for nagios
+  become: yes
+  yum_repository:
+    name: epel
+    state: absent
+
 - name: enable ec2 rhel7 repo for nagios
   become: yes
   yum_repository:
     name: epel
     description: EPEL YUM repo
-    baseurl: http://dl.fedoraproject.org/pub/epel/7/x86_64/Packages/e/epel-release-7-11.noarch.rpm
+    baseurl: http://download.fedoraproject.org/pub/epel/7/$basearch
+    metalink: https://mirrors.fedoraproject.org/metalink?repo=epel-7&arch=$basearch
+     
 
 - name: install some useful nagios plugins
   become: yes
