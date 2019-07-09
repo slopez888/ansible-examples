@@ -19,7 +19,7 @@
 #    src: RPM-GPG-KEY-EPEL-6
 #    dest: /etc/pki/rpm-gpg
 
-- name: remove ec2 rhel7 repo for nagios
+- name: remove any previous ec2 rhel7 repo for nagios
   become: yes
   yum_repository:
     name: epel
@@ -55,6 +55,7 @@
   tags: ntp
 
 - name: Configure ntp file
+  become: yes
   template:
     src: ntp.conf.j2
     dest: /etc/ntp.conf
@@ -62,6 +63,7 @@
   notify: restart ntp
 
 - name: Start the ntp service
+  become: yes
   service:
     name: ntpd
     state: started
@@ -70,6 +72,7 @@
 
 # work around RHEL 7, for now
 - name: insert iptables template
+  become: yes
   template:
     src: iptables.j2
     dest: /etc/sysconfig/iptables
