@@ -21,7 +21,9 @@
 
 - name: add RPM for ec2 rhel7 repo for nagios
   become: yes
-  shell: rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+  shell: |
+    rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+    yum install - y nagios-nrpe nagios-plugins-swap nagios-plugins-users nagios-plugins-procs nagios-plugins-load nagios-plugins-disk
 
 - name: enable ec2 rhel7 repo for nagios
   become: yes
