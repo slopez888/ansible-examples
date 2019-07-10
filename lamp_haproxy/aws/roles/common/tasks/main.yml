@@ -80,6 +80,6 @@
   notify: restart iptables
 
 - name: test to see if selinux is running
-  command: getenforce
+  shell: getenforce
   register: sestatus
   changed_when: false
