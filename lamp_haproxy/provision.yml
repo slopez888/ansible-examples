@@ -14,6 +14,10 @@
     zone: us-west-2a
     count: 1
     subnet_id: subnet-07d10bc0dda0bbfc6
+    web_name: Linux-webserver-001
+    db_name: Linux-db-001
+    lb_name: Linux-lb-001
+    monitoring_name: Linux-monitoring-001 
 
   vars_files:
   - group_vars/all
@@ -34,10 +38,11 @@
         tower: RHEL
         ansible_group: webservers
         ec2_tag: webservers
-        Name: Linux-webserver-001
+        Name: "{{ web_name }}"
       count_tag:
         Name: webservers
       exact_count: "{{ count }}"
+      id: "{{ web_name }}"
     register: ec2
 
   - name: Launch database instance
@@ -55,10 +60,11 @@
         tower: RHEL
         ansible_group: dbservers
         ec2_tag: dbservers
-        Name: Linux-db-001
+        Name: "{{ db_name }}"
       count_tag:
         Name: dbservers
       exact_count: "{{ count }}"  
+      id: "{{ db_name }}"
     register: ec2
 
   - name: Launch load balancing instance
@@ -76,10 +82,11 @@
         tower: RHEL
         ansible_group: lbservers
         ec2_tag: lbservers
-        Name: Linux-lb-001
+        Name: "{{ lb_name }}"
       count_tag:
         Name: lbservers
       exact_count: "{{ count }}" 
+      id: "{{ lb_name }}"
     register: ec2
 
   - name: Launch monitoring instance
@@ -97,10 +104,11 @@
         tower: RHEL
         ansible_group: monitoring
         ec2_tag: monitoring
-        Name: Linux-monitoring-001
+        Name: "{{ monitoring_name }}"
       count_tag:
         Name: monitoring
       exact_count: "{{ count }}"
+      id: "{{ monitoring_name }}"
     register: ec2
 
   - name: Wait for SSH to come up
