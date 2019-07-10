@@ -2,6 +2,7 @@
 # This role installs httpd
 
 - name: Install http
+  become: yes
   yum:
     name: "{{ item }}"
     state: present
@@ -12,11 +13,12 @@
    - git
 
 - name: Configure SELinux to allow httpd to connect to remote database
+  become: yes
   seboolean:
     name: httpd_can_network_connect_db
     state: true
     persistent: yes
-  when: sestatus.rc != 0
+  #when: sestatus.rc != 0
 
 - name: http service state
   service:
