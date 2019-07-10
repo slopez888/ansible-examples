@@ -30,7 +30,6 @@
     enabled: yes
 
 - name: Create Application Database
-  become: no
   mysql_db:
     name: "{{ dbname }}"
     state: present
