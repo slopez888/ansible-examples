@@ -29,11 +29,6 @@
     state: started
     enabled: yes
 
-- name: Create Application Database
-  mysql_db:
-    name: "{{ dbname }}"
-    state: present
-
 - name: Create Application DB User
   mysql_user:
     name: "{{ dbuser }}"
@@ -41,3 +36,10 @@
     priv: "*.*:ALL"
     host: '%'
     state: present
+
+- name: Create Application Database
+  become: no
+  mysql_db:
+    name: "{{ dbname }}"
+    state: present
+
